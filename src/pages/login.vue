@@ -4,8 +4,13 @@
       <div class="form-floating mb-4">
         <input
           type="email"
-          class="form-control rounded-0 "
-          style="background-color:#2d3035;border-top: 0px;border-left: 0px;border-right: 0px;"
+          class="form-control rounded-0"
+          style="
+            background-color: #2d3035;
+            border-top: 0px;
+            border-left: 0px;
+            border-right: 0px;
+          "
           id="floatingInput"
           placeholder="name@example.com"
         />
@@ -15,18 +20,29 @@
         <input
           type="password"
           class="form-control rounded-0"
-          style="background-color:#2d3035;border-top: 0px;border-left: 0px;border-right: 0px;"
+          style="
+            background-color: #2d3035;
+            border-top: 0px;
+            border-left: 0px;
+            border-right: 0px;
+          "
           id="floatingPassword"
           placeholder="Password"
         />
         <label for="floatingPassword">密码</label>
       </div>
+      <el-checkbox v-model="IsSave">备选项</el-checkbox>
     </div>
   </div>
 </template>
 <script>
 export default {
   name: "login",
+  data(){
+    return{
+      IsSave:false,
+    }
+  }
 };
 </script>
 
