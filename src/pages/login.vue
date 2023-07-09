@@ -19,7 +19,7 @@
         </div>
       </div>
       <!-- 密码 -->
-      <div class="form-floating mt-3">
+      <div class="form-floating mt-3" >
         <input
           type="password"
           class="form-control rounded-0 input"
@@ -66,7 +66,11 @@
         >
       </div>
     </div>
+    <div class="row">
+      <div class=" col-3"></div>
+    </div>
   </div>
+
 </template>
 <script>
 import { get } from "@/utils/http";
@@ -98,18 +102,21 @@ export default {
 
 
       if (!flag) return;
-      // get("/login", {
-      //   Username: this.username,
-      //   Password: this.password,
-      // }).then(
-      //   (Response) => {
-      //     console.log("请求成功", Response);
-      //   },
-      //   (error) => {
-      //     console.log("请求失败", error.message);
-      //   }
-      // );
+
+
+      get("/login", {
+        Username: this.username.data,
+        Password: this.password.data,
+      }).then(
+        (Response) => {
+          console.log("请求成功", Response.data);
+        },
+        (error) => {
+          console.log("请求失败", error.message);
+        }
+      );
     },
+    
   },
 };
 </script>
