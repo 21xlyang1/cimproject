@@ -1,6 +1,8 @@
 <template>
   <div>
-    顶部导航区
+    <!-- 商标 -->
+    
+    <!-- 个人信息 -->
   </div>
 </template>
 <script>
