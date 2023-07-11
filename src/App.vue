@@ -3,9 +3,13 @@
     <!-- <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" /> -->
     <!-- <loginsystem></loginsystem> -->
-    <router-view name="one" class="w-100  " style="min-width: 1100px; min-height: 1000px;"></router-view>
+    <router-view name="one" class="w-100  " :style="{ width: outerDivWidth, height: outerDivHeight }"></router-view>
+    <!-- <div
+      class="bg-black"
+      id="outer-div"
+      :style="{ width: outerDivWidth, height: outerDivHeight }"
+    ></div> -->
     <!-- <router-view name="tow"></router-view> -->
-
   </div>
 </template>
 
@@ -13,6 +17,29 @@
 export default {
   name: "App",
   components: {},
+  data() {
+    return {
+      outerDivWidth: "", // 最外层div的宽度
+      outerDivHeight: "", // 最外层div的高度
+    };
+  },
+  mounted() {
+    this.setOuterDivSize(); // 初始化时设置最外层div的尺寸
+
+    // 监听窗口大小改变事件，在窗口大小改变时更新最外层div的尺寸
+    window.addEventListener("resize", this.setOuterDivSize);
+  },
+  beforeDestroy() {
+    // 组件销毁时，移除窗口大小改变事件的监听
+    window.removeEventListener("resize", this.setOuterDivSize);
+  },
+  methods: {
+    setOuterDivSize() {
+      this.outerDivWidth = window.innerWidth + "px";
+      this.outerDivHeight = window.innerHeight + "px";
+    },
+  },
+
 };
 </script>
 
