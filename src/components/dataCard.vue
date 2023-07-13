@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="w-100 d-flex justify-content-center align-items-center" style="height: 60px;">
-      <div class="  d-flex justify-content-center" style="width: 150px ;height: 50px; background-color: rgba(219, 101, 116,0.8);">
+      <div class="  d-flex justify-content-center" style="width: 150px ;height: 50px; background-color: rgba(39, 153, 247, 0.8);">
         <div style="font-size: 33px;">{{ data }}</div>
         <div style="padding-top: 16px;padding-left: 4px;">{{ danwei }}</div>
       </div>

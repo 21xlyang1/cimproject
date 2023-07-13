@@ -1,1 +1,5 @@
 npm i @amap/amap-jsapi-loader --save
+bootstrap
+element-ui
+axios
+VueRouter
