@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4162643 */
+  src: url('iconfont.woff2?t=1689221528265') format('woff2'),
+       url('iconfont.woff?t=1689221528265') format('woff'),
+       url('iconfont.ttf?t=1689221528265') format('truetype');
+}
+
+[class*=" v-icon-"],[class^="v-icon-"] {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.v-icon-bofang:before {
+  content: "\e624";
+}
+
+.v-icon-zanting:before {
+  content: "\e629";
+}
+
+.v-icon-dataStatistic:before {
+  content: "\e60a";
+}
+
+.v-icon-cameraList:before {
+  content: "\e742";
+}
+
+.v-icon-mapCamera:before {
+  content: "\e884";
+}
+
+.v-icon-residentManage:before {
+  content: "\e659";
+}
+
+.v-icon-drowningList:before {
+  content: "\e7b3";
+}
+
+.v-icon-cameraShow:before {
+  content: "\e964";
+}
+
+.v-icon-violenceList:before {
+  content: "\e78c";
+}
+
+.v-icon-oursiderList:before {
+  content: "\e6cd";
+}
+

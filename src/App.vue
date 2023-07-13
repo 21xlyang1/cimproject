@@ -3,7 +3,7 @@
     <!-- <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" /> -->
     <!-- <loginsystem></loginsystem> -->
-    <router-view name="one" class="w-100  " :style="{ width: outerDivWidth, height: outerDivHeight }"></router-view>
+    <router-view name="one" class="  " style="min-width: 1300px; min-height: 500px;" :style="{ width: outerDivWidth, height: outerDivHeight }"></router-view>
     <!-- <div
       class="bg-black"
       id="outer-div"
@@ -35,6 +35,8 @@ export default {
   },
   methods: {
     setOuterDivSize() {
+
+
       this.outerDivWidth = window.innerWidth + "px";
       this.outerDivHeight = window.innerHeight + "px";
     },
@@ -43,5 +45,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="css" scoped>
+
+::v-deep .el-scrollbar__wrap{
+  overflow-x: hidden;
+}
 </style>

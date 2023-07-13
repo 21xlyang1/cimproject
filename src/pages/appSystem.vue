@@ -1,10 +1,10 @@
 <template>
-  <div class="" style="display: flex;flex-direction: column;">
-    <div class="" style="height: 110px">
+  <div class="bgimg w-100"  style=" display: flex;flex-direction: column;background-image: url('./static/bgImg/asbg2.jpg');">
+    <div class="" style="min-height: 110px">
       <myHead class="w-100 h-100"></myHead>
     </div>
-    <div class="d-flex  bg-black  " style="flex: 1;" >
-      <div class="h-100 bg-danger" style="width: 300px;">
+    <div class="d-flex   " style="flex: 1;" >
+      <div class="h-100 " style="min-width: 300px;">
         <asideNav></asideNav>
       </div>
       <div class="h-100 " style="flex-grow: 1;"  > 
@@ -25,5 +25,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.bgimg{
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 </style>
 

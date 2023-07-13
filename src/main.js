@@ -7,7 +7,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import VIcon from './components/v-icon/index.vue'
 
+Vue.component('v-icon',VIcon)
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(VueRouter)
