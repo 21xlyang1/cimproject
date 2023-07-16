@@ -8,7 +8,8 @@ import qs from "qs";
 // 现在，在超时前，所有请求都会等待 2.5 秒
 const instance = axios.create({
   // baseURL: "http://45.153.131.189:5050",
-  baseURL: "http://localhost:5050",
+  baseURL: "http://47.111.91.222:5000",
+  // baseURL: "http://localhost:5050",
   timeout: 5000,
 });
 // 添加请求拦截器

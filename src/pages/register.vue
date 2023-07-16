@@ -147,6 +147,8 @@
   </div>
 </template>
 <script>
+import { get, post } from '@/utils/http';
+import axios from 'axios';
 export default {
   name: "register",
   data() {
@@ -220,7 +222,19 @@ export default {
         this.activationCode.info = "请输入激活码，若没有激活码，请联系我们";
       }
 
-      if (!flag) return;
+      // if (!flag) return;
+      post("/auth/register",{
+        username:this.username
+      }).then(
+        (Response) => {
+          console.log("请求成功", Response);
+        },
+        (error) => {
+          console.log("请求失败", error.message);
+        }
+      );
+
+
       console.log("注册成功");
     },
   },
