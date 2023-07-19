@@ -249,38 +249,37 @@
       <template slot="title">
         <div style="font-size: 22px">查看历史记录</div>
       </template>
-      <el-scrollbar style=" height: 500px;">
-      <div style="color: rgb(211, 211, 211)" class="ps-4 pe-4">
-        <el-timeline>
-          <el-timeline-item
-            v-for="(item, index) in record"
-            :key="index"
-            :icon="
-              item.type == 'add'
-                ? 'el-icon-plus'
-                : item.type == 'delate'
-                ? 'el-icon-delete'
-                : 'el-icon-edit'
-            "
-            :type="
-              item.type == 'add'
-                ? 'success'
-                : item.type == 'delate'
-                ? 'danger'
-                : 'primary'
-            "
-            size="large"
-            :timestamp="item.time"
-          >
-            <div class="d-flex">
-              <div class="me-1" style="color: aqua">{{ item.user }}</div>
-              <div style="color: aliceblue">{{ item.content }}</div>
-            </div>
-          </el-timeline-item>
-        </el-timeline>
-      </div>
+      <el-scrollbar style="height: 500px">
+        <div style="color: rgb(211, 211, 211)" class="ps-4 pe-4">
+          <el-timeline>
+            <el-timeline-item
+              v-for="(item, index) in record"
+              :key="index"
+              :icon="
+                item.type == 'add'
+                  ? 'el-icon-plus'
+                  : item.type == 'delate'
+                  ? 'el-icon-delete'
+                  : 'el-icon-edit'
+              "
+              :type="
+                item.type == 'add'
+                  ? 'success'
+                  : item.type == 'delate'
+                  ? 'danger'
+                  : 'primary'
+              "
+              size="large"
+              :timestamp="item.time"
+            >
+              <div class="d-flex">
+                <div class="me-1" style="color: aqua">{{ item.user }}</div>
+                <div style="color: aliceblue">{{ item.content }}</div>
+              </div>
+            </el-timeline-item>
+          </el-timeline>
+        </div>
       </el-scrollbar>
-
     </el-dialog>
   </div>
 </template>
@@ -297,7 +296,7 @@ export default {
           sex: "男",
           phone: "1231231222",
           type: "村民",
-          address: "发斯蒂芬进化萨",
+          address: "陇头工业区二区4号",
         },
         {
           realname: "王小刚",
@@ -305,7 +304,7 @@ export default {
           sex: "男",
           phone: "1231231222",
           type: "村民",
-          address: "发斯蒂芬进化萨",
+          address: "陇头工业区二区4号",
         },
 
         {
@@ -314,7 +313,7 @@ export default {
           sex: "男",
           phone: "1231231222",
           type: "村民",
-          address: "发斯蒂芬进化萨",
+          address: "陇头工业区二区4号",
         },
         {
           realname: "王小刚",
@@ -322,7 +321,7 @@ export default {
           sex: "男",
           phone: "1231231222",
           type: "村民",
-          address: "发斯蒂芬进化萨",
+          address: "陇头工业区二区4号",
         },
         {
           realname: "王小刚",
@@ -330,7 +329,7 @@ export default {
           sex: "男",
           phone: "1231231222",
           type: "村民",
-          address: "发斯蒂芬进化萨",
+          address: "陇头工业区二区4号",
         },
         {
           realname: "王小刚",
@@ -338,7 +337,7 @@ export default {
           sex: "男",
           phone: "1231231222",
           type: "村民",
-          address: "发斯蒂芬进化萨",
+          address: "陇头工业区二区4号",
         },
         {
           realname: "王小刚",
@@ -346,7 +345,7 @@ export default {
           sex: "男",
           phone: "1231231222",
           type: "村民",
-          address: "发斯蒂芬进化萨",
+          address: "陇头工业区二区4号",
         },
         {
           realname: "王小刚",
@@ -354,7 +353,7 @@ export default {
           sex: "男",
           phone: "1231231222",
           type: "村民",
-          address: "发斯蒂芬进化萨",
+          address: "陇头工业区二区4号",
         },
         {
           realname: "王小刚",
@@ -362,7 +361,7 @@ export default {
           sex: "男",
           phone: "1231231222",
           type: "村民",
-          address: "发斯蒂芬进化萨",
+          address: "陇头工业区二区4号",
         },
         {
           realname: "王小刚",
@@ -370,7 +369,7 @@ export default {
           sex: "男",
           phone: "1231231222",
           type: "村民",
-          address: "发斯蒂芬进化萨",
+          address: "陇头工业区二区4号",
         },
         {
           realname: "王小刚",
@@ -378,7 +377,7 @@ export default {
           sex: "男",
           phone: "1231231222",
           type: "村民",
-          address: "发斯蒂芬进化萨",
+          address: "陇头工业区二区4号",
         },
         {
           realname: "王小刚",
@@ -386,7 +385,7 @@ export default {
           sex: "男",
           phone: "1231231222",
           type: "村民",
-          address: "发斯蒂芬进化萨",
+          address: "陇头工业区二区4号",
         },
       ],
       record: [
@@ -400,13 +399,13 @@ export default {
           time: "2018-04-12 08:36:45",
           user: "李四",
           content: "删除了一位常驻人员信息",
-          type: "delate", 
+          type: "delate",
         },
         {
           time: "2018-04-12 19:42:42",
           user: "王五",
           content: "修改了一位常驻人员信息",
-          type: "edit", 
+          type: "edit",
         },
         {
           time: "2018-04-12 20:46:12",
@@ -418,13 +417,13 @@ export default {
           time: "2018-04-12 08:36:45",
           user: "李四",
           content: "删除了一位常驻人员信息",
-          type: "delate", 
+          type: "delate",
         },
         {
           time: "2018-04-12 19:42:42",
           user: "王五",
           content: "修改了一位常驻人员信息",
-          type: "edit", 
+          type: "edit",
         },
         {
           time: "2018-04-12 20:46:12",
@@ -436,13 +435,13 @@ export default {
           time: "2018-04-12 08:36:45",
           user: "李四",
           content: "删除了一位常驻人员信息",
-          type: "delate", 
+          type: "delate",
         },
         {
           time: "2018-04-12 19:42:42",
           user: "王五",
           content: "修改了一位常驻人员信息",
-          type: "edit", 
+          type: "edit",
         },
         {
           time: "2018-04-12 20:46:12",
@@ -454,13 +453,13 @@ export default {
           time: "2018-04-12 08:36:45",
           user: "李四",
           content: "删除了一位常驻人员信息",
-          type: "delate", 
+          type: "delate",
         },
         {
           time: "2018-04-12 19:42:42",
           user: "王五",
           content: "修改了一位常驻人员信息",
-          type: "edit", 
+          type: "edit",
         },
         {
           time: "2018-04-12 20:46:12",
@@ -472,13 +471,13 @@ export default {
           time: "2018-04-12 08:36:45",
           user: "李四",
           content: "删除了一位常驻人员信息",
-          type: "delate", 
+          type: "delate",
         },
         {
           time: "2018-04-12 19:42:42",
           user: "王五",
           content: "修改了一位常驻人员信息",
-          type: "edit", 
+          type: "edit",
         },
         {
           time: "2018-04-12 20:46:12",
@@ -490,13 +489,13 @@ export default {
           time: "2018-04-12 08:36:45",
           user: "李四",
           content: "删除了一位常驻人员信息",
-          type: "delate", 
+          type: "delate",
         },
         {
           time: "2018-04-12 19:42:42",
           user: "王五",
           content: "修改了一位常驻人员信息",
-          type: "edit", 
+          type: "edit",
         },
       ],
       search: "",

@@ -23,7 +23,6 @@
     <div class="h-100" style="min-width: 200px; background: rgba(249, 246, 246, 0.85)">
       <div class="w-100 d-flex justify-content-center">
         <dataCard danwei="人" title="当前移动人员总数" :data="1250"></dataCard>
-      </div>
       <div class=" mt-4 w-100 d-flex justify-content-center">
         <dataCard danwei="人" title="当日最高人流量" :data="1600"></dataCard>
       </div>
@@ -66,7 +65,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 #app {
   padding: 0;
   margin: 0;

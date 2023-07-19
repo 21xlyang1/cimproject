@@ -6,13 +6,13 @@
         id="overlayContainer"
         style="width: 260px; color: beige; font-size: 18px"
       >
-        <div class="w-100 p-1 ps-3  changcolor" style="">
+        <div class="w-100 p-1 ps-3 changcolor" style="">
           {{ overName }}
         </div>
         <div class="ps-3 p-2 pt-3">最大人流量：</div>
         <div class="ps-3 p-2">当前人流量：</div>
-        <div class="ps-3 p-2 ">当日最大人流量：</div>
-        <div class="w-100 p-2  d-flex justify-content-center">
+        <div class="ps-3 p-2">当日最大人流量：</div>
+        <div class="w-100 p-2 d-flex justify-content-center">
           <el-button type="warning" size="small">查看该处监控</el-button>
         </div>
       </div>
@@ -125,6 +125,27 @@ export default {
       this.overShow = true;
       this.overName = name;
     },
+    updatePoints() {
+      console.log("")
+      // // 获取地图容器的像素大小
+      // const mapContainer = document.getElementById("container");
+      // const containerWidth = mapContainer.offsetWidth;
+      // const containerHeight = mapContainer.offsetHeight;
+
+      // // 获取地图中心点经纬度
+      // const center = this.map.getCenter();
+      // // 将中心点经纬度转换为像素坐标
+      // const centerPixel = this.map.lngLatToContainer(center);
+
+      // // 计算相对于地图容器的绝对位置（px）
+      // const x =
+      //   (centerPixel.getX() / this.map.getSize().getWidth()) * containerWidth;
+      // const y =
+      //   (centerPixel.getY() / this.map.getSize().getHeight()) * containerHeight;
+
+      // // 更新点的位置信息
+      // this.points.push({ x, y });
+    },
   },
   mounted() {
     var op = this.openOver;
@@ -225,6 +246,35 @@ export default {
           });
 
           markers.push(marker); // 将标记添加到数组中
+
+          // 监听地图点击事件
+          map.on("click", function (e) {
+            // 将点击点的经纬度转换为像素坐标
+            const targetPixel = map.lngLatToContainer(e.lnglat);
+
+            // 获取地图容器的像素大小
+            const mapContainer = document.getElementById("container");
+            const containerWidth = mapContainer.offsetWidth;
+            const containerHeight = mapContainer.offsetHeight;
+
+            // 计算相对于地图容器的绝对位置（px）
+            const absoluteX =
+              (targetPixel.getX() / map.getSize().getWidth()) * containerWidth;
+            const absoluteY =
+              (targetPixel.getY() / map.getSize().getHeight()) *
+              containerHeight;
+
+            // 打印目标点在CSS中的绝对位置
+            console.log(
+              `点击的点在CSS中的绝对位置：${absoluteX}px, ${absoluteY}px`
+            );
+          });
+
+          // 监听地图拖拽事件
+          map.on("dragging", this.updatePoints);
+
+          // 监听地图缩放事件
+          map.on("zoomchange", this.updatePoints);
         });
       })
       .catch((e) => {
