@@ -16,6 +16,10 @@
           <el-button type="warning" size="small">查看该处监控</el-button>
         </div>
       </div>
+      <div
+        class="targetPoint"
+        :style="{ left: point.x + 'px', top: point.y + 'px' }"
+      ></div>
     </div>
   </div>
 </template>
@@ -118,6 +122,10 @@ export default {
       ],
       overShow: false,
       overName: "",
+      point:{
+        x:0,
+        y:0
+      },
     };
   },
   methods: {
@@ -125,30 +133,34 @@ export default {
       this.overShow = true;
       this.overName = name;
     },
-    updatePoints() {
-      console.log("")
-      // // 获取地图容器的像素大小
-      // const mapContainer = document.getElementById("container");
-      // const containerWidth = mapContainer.offsetWidth;
-      // const containerHeight = mapContainer.offsetHeight;
+    updatePoints(map,coord) {
 
-      // // 获取地图中心点经纬度
-      // const center = this.map.getCenter();
-      // // 将中心点经纬度转换为像素坐标
-      // const centerPixel = this.map.lngLatToContainer(center);
+      const center = coord;
 
-      // // 计算相对于地图容器的绝对位置（px）
-      // const x =
-      //   (centerPixel.getX() / this.map.getSize().getWidth()) * containerWidth;
-      // const y =
-      //   (centerPixel.getY() / this.map.getSize().getHeight()) * containerHeight;
+      // 获取地图容器的像素大小
+      const mapContainer = document.getElementById("container");
+      const containerWidth = mapContainer.offsetWidth;
+      const containerHeight = mapContainer.offsetHeight;
 
-      // // 更新点的位置信息
-      // this.points.push({ x, y });
+      
+      // 将中心点经纬度转换为像素坐标
+      const centerPixel = map.lngLatToContainer(center);
+
+      // 计算相对于地图容器的绝对位置（px）
+      const x =
+        (centerPixel.getX() / map.getSize().getWidth()) * containerWidth;
+      const y =
+        (centerPixel.getY() / map.getSize().getHeight()) * containerHeight;
+
+      // 更新点的位置信息
+      this.point.x=x;
+      this.point.y=y;
+      console.log(this.point)
     },
   },
   mounted() {
     var op = this.openOver;
+    var uppoint=this.updatePoints;
     AMapLoader.load({
       key: "847ad1cefeddf2879da67b9d88ae686a", // 申请好的Web端开发者Key，首次调用 load 时必填
       version: "2.0", // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
@@ -263,18 +275,14 @@ export default {
             const absoluteY =
               (targetPixel.getY() / map.getSize().getHeight()) *
               containerHeight;
-
+            uppoint(map,e.lnglat)
             // 打印目标点在CSS中的绝对位置
             console.log(
               `点击的点在CSS中的绝对位置：${absoluteX}px, ${absoluteY}px`
             );
           });
 
-          // 监听地图拖拽事件
-          map.on("dragging", this.updatePoints);
 
-          // 监听地图缩放事件
-          map.on("zoomchange", this.updatePoints);
         });
       })
       .catch((e) => {
@@ -300,5 +308,12 @@ export default {
     rgb(236, 219, 65, 0.9)
   );
 }
+.targetPoint {
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      position: absolute;
+      z-index: 100;
+    }
 </style>
 
