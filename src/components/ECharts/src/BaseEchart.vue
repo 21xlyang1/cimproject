@@ -45,6 +45,7 @@ export default {
   },
   mounted() {
     this.initChart();
+    
   },
   beforeDestroy() {
     if (!this.chart) {

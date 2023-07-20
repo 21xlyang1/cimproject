@@ -2,8 +2,9 @@
     <base-echart
       id="bar-echart"
       class="bar-echart"
-      width="400px"
+      width="200px"
       height="200px"
+      margin-top = "50px"
       :option="option"
     />
   </template>
@@ -43,6 +44,9 @@
         this.option = {
           title: {
             text: "World Population",
+            textStyle:{
+              color:"#fff",
+            }
           },
           tooltip: {
             trigger: "axis",
@@ -50,7 +54,13 @@
               type: "shadow",
             },
           },
-          legend: {},
+          legend: {
+          top: "10%",
+          left: "center",
+          textStyle:{
+              color:"#fff",
+            }
+        },
           grid: {
             left: "3%",
             right: "4%",
@@ -59,14 +69,26 @@
           },
           xAxis: {
             type: "value",
-            boundaryGap: [0, 0.01],
+            name:"GDP(单位：十万)",
+            // max:7,
+            // min:0,
+            data: ["1", "2", "3", "4", "5", "6","7"],
+            // scale: true, //自适应
+            // splitNumber: 7
+            axisLabel:{
+					color:"#fff"
+				}
+
           },
           yAxis: {
             type: "category",
             data: ["Brazil", "Indonesia", "USA", "India", "China", "World"],
+            axisLabel:{
+					color:"#fff"
+				}
           },
           series: [
-            {
+              {
               name: "2011",
               type: "bar",
               data: [18203, 23489, 29034, 104970, 131744, 630230],
@@ -78,7 +100,7 @@
             },
           ],
         };
-      }, 3000);
+      }, 100);
     },
   };
   </script>
