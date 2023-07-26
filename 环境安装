@@ -3,3 +3,4 @@ bootstrap
 element-ui
 axios
 VueRouter
+VueCookies

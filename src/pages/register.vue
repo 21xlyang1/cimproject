@@ -3,110 +3,84 @@
     <div class="row" style="margin-top: 40px">
       <div class="col-4">
         <!-- 姓名 -->
-        <div class="form-floating">
-          <input
-            type="email"
-            class="form-control rounded-0 input"
-            v-model="realname.data"
-            placeholder="name@example.com"
-          />
-          <label>真实姓名</label>
-          <div
-            class="small"
-            :class="realname.state == 1 ? 'text-warning' : 'text-danger'"
-            style="height: 16px"
-          >
-            {{ realname.info }}
-          </div>
+        <FloatingLabel
+          :label="'真实姓名'"
+          v-model="realname.data"
+        ></FloatingLabel>
+        <div
+          class="small"
+          :class="realname.state == 1 ? 'text-warning' : 'text-danger'"
+          style="height: 16px"
+        >
+          {{ realname.info }}
         </div>
       </div>
       <div class="col-8">
         <!-- 手机号 -->
-        <div class="form-floating">
-          <input
-            type="email"
-            class="form-control rounded-0 input"
-            v-model="phoneNumber.data"
-            placeholder="name@example.com"
-          />
-          <label>手机号码</label>
-          <div
-            class="small"
-            :class="phoneNumber.state == 1 ? 'text-warning' : 'text-danger'"
-            style="height: 16px"
-          >
-            {{ phoneNumber.info }}
-          </div>
+        <FloatingLabel
+          :label="'手机号码'"
+          v-model="phoneNumber.data"
+        ></FloatingLabel>
+        <div
+          class="small"
+          :class="phoneNumber.state == 1 ? 'text-warning' : 'text-danger'"
+          style="height: 16px"
+        >
+          {{ phoneNumber.info }}
         </div>
       </div>
     </div>
     <!-- 用户名 -->
-    <div class="form-floating">
-      <input
-        type="email"
-        class="form-control rounded-0 input"
-        v-model="username.data"
-        placeholder="name@example.com"
-      />
-      <label>用户名</label>
-      <div
-        class="small"
-        :class="username.state == 1 ? 'text-warning' : 'text-danger'"
-        style="height: 16px"
-      >
-        {{ username.info }}
-      </div>
+    <FloatingLabel :label="'用户名'" v-model="username.data"></FloatingLabel>
+
+    <div
+      class="small"
+      :class="username.state == 1 ? 'text-warning' : 'text-danger'"
+      style="height: 16px"
+    >
+      {{ username.info }}
     </div>
     <!-- 密码 -->
-    <div class="form-floating">
-      <input
-        type="password"
-        class="form-control rounded-0 input"
-        v-model="password.data"
-        placeholder="Password"
-      />
-      <label>密码</label>
-      <div
-        class="small"
-        :class="password.state == 1 ? 'text-warning' : 'text-danger'"
-        style="height: 16px"
-      >
-        {{ password.info }}
-      </div>
+    <FloatingLabel
+      :type="'password'"
+      :label="'密码'"
+      v-model="password.data"
+    ></FloatingLabel>
+
+    <div
+      class="small"
+      :class="password.state == 1 ? 'text-warning' : 'text-danger'"
+      style="height: 16px"
+    >
+      {{ password.info }}
     </div>
+
     <!-- 确认密码 -->
-    <div class="form-floating">
-      <input
-        type="password"
-        class="form-control rounded-0 input"
-        v-model="repassword.data"
-        placeholder="Password"
-      />
-      <label>确认密码</label>
-      <div
-        class="small"
-        :class="repassword.state == 1 ? 'text-warning' : 'text-danger'"
-        style="height: 16px"
-      >
-        {{ repassword.info }}
-      </div>
+    <FloatingLabel
+      :type="'password'"
+      :label="'确认密码'"
+      v-model="repassword.data"
+    ></FloatingLabel>
+
+    <div
+      class="small"
+      :class="repassword.state == 1 ? 'text-warning' : 'text-danger'"
+      style="height: 16px"
+    >
+      {{ repassword.info }}
     </div>
     <!-- 激活码 -->
-    <div class="form-floating">
-      <input
-        type="email"
-        class="form-control rounded-0 input"
-        v-model="activationCode.data"
-        placeholder="name@example.com"
-      />
-      <label>激活码</label>
-      <div
-        class="small"
-        :class="activationCode.state == 1 ? 'text-warning' : 'text-danger'"
-        style="height: 16px"
-      >
-        {{ activationCode.info }}
-      </div>
+    <FloatingLabel
+      :label="'激活码'"
+      v-model="activationCode.data"
+    ></FloatingLabel>
+
+    <div
+      class="small"
+      :class="activationCode.state == 1 ? 'text-warning' : 'text-danger'"
+      style="height: 16px"
+    >
+      {{ activationCode.info }}
     </div>
     <!-- 同意政策 -->
     <el-checkbox
@@ -147,30 +121,32 @@
   </div>
 </template>
 <script>
-import { get, post } from '@/utils/http';
-import axios from 'axios';
+import FloatingLabel from "@/components/FloatingLabel.vue";
+import { get, post } from "@/utils/http";
+import axios from "axios";
 export default {
   name: "register",
+  components: { FloatingLabel },
   data() {
     return {
       isAgree: false,
-      realname: { data: "", state: 0, info: "" },//state若为0，则提示为红色，若为1，则提示为黄色
-      phoneNumber: {data: "",state: 0,info: ""},
-      username: {data: "",state: 0,info: ""},
-      password: {data: "",state: 0,info: ""},
-      repassword: {data: "",state: 0,info: ""},
-      activationCode: {data: "",state: 0,info: ""},
+      realname: { data: "", state: 0, info: "" }, //state若为0，则提示为红色，若为1，则提示为黄色
+      phoneNumber: { data: "", state: 0, info: "" },
+      username: { data: "", state: 0, info: "" },
+      password: { data: "", state: 0, info: "" },
+      repassword: { data: "", state: 0, info: "" },
+      activationCode: { data: "", state: 0, info: "" },
     };
   },
   methods: {
     register() {
       // console.log(this.username, this.password, this.unInfo, this.pwInfo);
-      this.realname.info= "";
-      this.phoneNumber.info= "";
-      this.username.info= "";
-      this.password.info= "";
-      this.repassword.info= "";
-      this.activationCode.info= "";
+      this.realname.info = "";
+      this.phoneNumber.info = "";
+      this.username.info = "";
+      this.password.info = "";
+      this.repassword.info = "";
+      this.activationCode.info = "";
       var flag = true;
       // 表单验证
       if (this.realname.data == "") {
@@ -183,9 +159,9 @@ export default {
         this.phoneNumber.state = 1;
         this.phoneNumber.info = "请输入手机号码";
         flag = false;
-      }else if(this.phoneNumber.data.length!=11){
-        this.phoneNumber.state=0;
-        this.phoneNumber.info="手机号码的格式不正确"
+      } else if (this.phoneNumber.data.length != 11) {
+        this.phoneNumber.state = 0;
+        this.phoneNumber.info = "手机号码的格式不正确";
       }
 
       if (this.username.data == "") {
@@ -201,8 +177,6 @@ export default {
         flag = false;
       }
 
-
-
       if (this.password.data == "") {
         this.password.state = 1;
         this.password.info = "请输入密码";
@@ -212,9 +186,9 @@ export default {
         this.repassword.state = 1;
         this.repassword.info = "请再次输入密码";
         flag = false;
-      }else if(this.password.data!=this.repassword.data){
-        this.repassword.state=0;
-        this.repassword.info="两次密码输入不一致"
+      } else if (this.password.data != this.repassword.data) {
+        this.repassword.state = 0;
+        this.repassword.info = "两次密码输入不一致";
       }
 
       if (this.activationCode.data == "") {
@@ -222,18 +196,25 @@ export default {
         this.activationCode.info = "请输入激活码，若没有激活码，请联系我们";
       }
 
-      // if (!flag) return;
-      post("/auth/register",{
-        username:this.username
+      if (!flag) return;
+      post("/auth/register", {
+        username: this.username.data,
+        password:this.password.data,
+        repassword:this.repassword.data,
+        realName:this.realname.data,
+        phoneNumber:this.phoneNumber.data,
+        activationCode:this.activationCode.data
       }).then(
         (Response) => {
           console.log("请求成功", Response);
+          if(Response.isSuccess){
+
+          }
         },
         (error) => {
           console.log("请求失败", error.message);
         }
       );
-
 
       console.log("注册成功");
     },

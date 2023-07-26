@@ -270,98 +270,98 @@ export default {
     };
   },
   methods: {
-    // getartInf() {
-    //   var LabelId = [];
-    //   if (this.choosed != [])
-    //     for (var i = 0; i < this.choosed.length; i++) {
-    //       LabelId.push(this.choosed[i].ID);
-    //     }
-    //   get("/article/getinflist", {
-    //     Keyword: this.search,
-    //     LabelId: LabelId,
-    //     Order: 0,
-    //   }).then(
-    //     (Response) => {
-    //       console.log("请求成功", Response);
-    //       this.articleInf = Response;
-    //       //去重
-    //       for (var k = 0; k < this.articleInf.length; k++) {
-    //         for (var i = 0; i < this.articleInf[k].Label.length; i++) {
-    //           for (var j = i + 1; j < this.articleInf[k].Label.length; j++) {
-    //             if (
-    //               this.articleInf[k].Label[i].ID ==
-    //               this.articleInf[k].Label[j].ID
-    //             ) {
-    //               console.log(i);
-    //               this.articleInf[k].Label.splice(j, 1);
-    //               j--;
-    //             }
-    //           }
-    //         }
-    //       }
-    //       // console.log("asdfads")
-    //       this.rows = this.articleInf.length;
-    //       this.currentPage = 1;
-    //       this.upshowinf();
-    //     },
-    //     (error) => {
-    //       console.log("请求失败", error.message);
-    //     }
-    //   );
-    // },
-    // upshowinf() {
-    //   this.showInf = [];
-    //   if (this.articleInf == []) return;
-    //   for (var i = 0; i < this.perPage; i++) {
-    //     var j = (this.currentPage - 1) * this.perPage + i;
-    //     if (j >= this.articleInf.length) break;
-    //     this.showInf[i] = this.articleInf[j];
-    //   }
-    // },
-    // getlab() {
-    //   get("/article/getlab").then(
-    //     (Response) => {
-    //       console.log("请求成功", Response);
-    //       this.label = Response;
-    //     },
-    //     (error) => {
-    //       console.log("请求失败", error.message);
-    //     }
-    //   );
-    // },
-    // addlabel(id, name) {
-    //   console.log(id);
-    //   // this.choosed[this.choosedNum++]=this.label[id-1]
-    //   for (var i = 0; i < this.choosed.length; i++) {
-    //     if (this.choosed[i].ID == id) return;
-    //   }
-    //   this.choosed.push({ ID: id, Name: name });
-    //   console.log(this.choosed);
-    // },
-    // delabel(id) {
-    //   console.log(id);
-    //   for (var i = 0; i < this.choosed.length; i++) {
-    //     if (id == this.choosed[i].ID) {
-    //       this.choosed.splice(i, 1);
-    //     }
-    //   }
-    //   // console.log(this.choosed)
-    // },
+    getartInf() {
+      var LabelId = [];
+      if (this.choosed != [])
+        for (var i = 0; i < this.choosed.length; i++) {
+          LabelId.push(this.choosed[i].ID);
+        }
+      get("/article/getinflist", {
+        Keyword: this.search,
+        LabelId: LabelId,
+        Order: 0,
+      }).then(
+        (Response) => {
+          console.log("请求成功", Response);
+          this.articleInf = Response;
+          //去重
+          for (var k = 0; k < this.articleInf.length; k++) {
+            for (var i = 0; i < this.articleInf[k].Label.length; i++) {
+              for (var j = i + 1; j < this.articleInf[k].Label.length; j++) {
+                if (
+                  this.articleInf[k].Label[i].ID ==
+                  this.articleInf[k].Label[j].ID
+                ) {
+                  console.log(i);
+                  this.articleInf[k].Label.splice(j, 1);
+                  j--;
+                }
+              }
+            }
+          }
+          // console.log("asdfads")
+          this.rows = this.articleInf.length;
+          this.currentPage = 1;
+          this.upshowinf();
+        },
+        (error) => {
+          console.log("请求失败", error.message);
+        }
+      );
+    },
+    upshowinf() {
+      this.showInf = [];
+      if (this.articleInf == []) return;
+      for (var i = 0; i < this.perPage; i++) {
+        var j = (this.currentPage - 1) * this.perPage + i;
+        if (j >= this.articleInf.length) break;
+        this.showInf[i] = this.articleInf[j];
+      }
+    },
+    getlab() {
+      get("/article/getlab").then(
+        (Response) => {
+          console.log("请求成功", Response);
+          this.label = Response;
+        },
+        (error) => {
+          console.log("请求失败", error.message);
+        }
+      );
+    },
+    addlabel(id, name) {
+      console.log(id);
+      // this.choosed[this.choosedNum++]=this.label[id-1]
+      for (var i = 0; i < this.choosed.length; i++) {
+        if (this.choosed[i].ID == id) return;
+      }
+      this.choosed.push({ ID: id, Name: name });
+      console.log(this.choosed);
+    },
+    delabel(id) {
+      console.log(id);
+      for (var i = 0; i < this.choosed.length; i++) {
+        if (id == this.choosed[i].ID) {
+          this.choosed.splice(i, 1);
+        }
+      }
+      // console.log(this.choosed)
+    },
   },
   beforeMount() {
-    // this.getlab();
-    // this.getartInf();
+    this.getlab();
+    this.getartInf();
   },
   mounted() {},
-  // watch: {
-  //   currentPage: {
-  //     handler() {
-  //       console.log("3", this.rows, this.perPage, this.currentPage);
-  //       // this.upshowinf();
-  //     },
-  //     immediate: true,
-  //   },
-  // },
+  watch: {
+    currentPage: {
+      handler() {
+        console.log("3", this.rows, this.perPage, this.currentPage);
+        // this.upshowinf();
+      },
+      immediate: true,
+    },
+  },
 };
 </script>
 

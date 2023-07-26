@@ -126,6 +126,7 @@ export default {
         x:0,
         y:0
       },
+      intervalId: null // 用于存储定时器的 ID
     };
   },
   methods: {
@@ -155,7 +156,7 @@ export default {
       // 更新点的位置信息
       this.point.x=x;
       this.point.y=y;
-      console.log(this.point)
+      // console.log(this.point)
     },
   },
   mounted() {
@@ -275,7 +276,9 @@ export default {
             const absoluteY =
               (targetPixel.getY() / map.getSize().getHeight()) *
               containerHeight;
-            uppoint(map,e.lnglat)
+            
+              this.intervalId = setInterval(()=>{uppoint(map,e.lnglat)}, 1); // 设置间隔时间为 1000 毫秒（1秒）
+            // uppoint(map,e.lnglat)
             // 打印目标点在CSS中的绝对位置
             console.log(
               `点击的点在CSS中的绝对位置：${absoluteX}px, ${absoluteY}px`

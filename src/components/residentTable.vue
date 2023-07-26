@@ -62,13 +62,15 @@
         </template>
       </el-table-column>
     </el-table>
+    <!-- 分页导航 -->
     <div class="w-100 mt-4 d-flex justify-content-center">
       <el-pagination
         background
-        :page-size="20"
-        :pager-count="11"
+        :current-page.sync="currentPage"
+        :total="rows"
+        :per-page="perPage"
+        first-number
         layout="prev, pager, next"
-        :total="1000"
       >
       </el-pagination>
     </div>
@@ -165,9 +167,7 @@
       </el-dialog>
 
       <div slot="footer" class="d-flex justify-content-center">
-        <el-button type="success" @click="dialogAddVisible = false"
-          >确定添加</el-button
-        >
+        <el-button type="success" @click="addResident">确定添加</el-button>
       </div>
     </el-dialog>
     <!-- 修改对话框 -->
@@ -232,9 +232,7 @@
       </el-dialog>
 
       <div slot="footer" class="d-flex justify-content-center">
-        <el-button type="success" @click="dialogUpsetVisible = false"
-          >确定修改</el-button
-        >
+        <el-button type="success" @click="upsetResident">确定修改</el-button>
       </div>
     </el-dialog>
     <!-- 历史记录对话框 -->
@@ -284,11 +282,13 @@
   </div>
 </template>
 <script>
+import { get, post } from "@/utils/http";
 export default {
   name: "residentTable",
   data() {
     return {
-      showInf: [
+      showInf: [],
+      tableInf: [
         {
           id: 1,
           realname: "王小刚",
@@ -298,96 +298,8 @@ export default {
           type: "村民",
           address: "陇头工业区二区4号",
         },
-        {
-          realname: "王小刚",
-          age: "26",
-          sex: "男",
-          phone: "1231231222",
-          type: "村民",
-          address: "陇头工业区二区4号",
-        },
-
-        {
-          realname: "王小刚",
-          age: "26",
-          sex: "男",
-          phone: "1231231222",
-          type: "村民",
-          address: "陇头工业区二区4号",
-        },
-        {
-          realname: "王小刚",
-          age: "26",
-          sex: "男",
-          phone: "1231231222",
-          type: "村民",
-          address: "陇头工业区二区4号",
-        },
-        {
-          realname: "王小刚",
-          age: "26",
-          sex: "男",
-          phone: "1231231222",
-          type: "村民",
-          address: "陇头工业区二区4号",
-        },
-        {
-          realname: "王小刚",
-          age: "26",
-          sex: "男",
-          phone: "1231231222",
-          type: "村民",
-          address: "陇头工业区二区4号",
-        },
-        {
-          realname: "王小刚",
-          age: "26",
-          sex: "男",
-          phone: "1231231222",
-          type: "村民",
-          address: "陇头工业区二区4号",
-        },
-        {
-          realname: "王小刚",
-          age: "26",
-          sex: "男",
-          phone: "1231231222",
-          type: "村民",
-          address: "陇头工业区二区4号",
-        },
-        {
-          realname: "王小刚",
-          age: "26",
-          sex: "男",
-          phone: "1231231222",
-          type: "村民",
-          address: "陇头工业区二区4号",
-        },
-        {
-          realname: "王小刚",
-          age: "26",
-          sex: "男",
-          phone: "1231231222",
-          type: "村民",
-          address: "陇头工业区二区4号",
-        },
-        {
-          realname: "王小刚",
-          age: "26",
-          sex: "男",
-          phone: "1231231222",
-          type: "村民",
-          address: "陇头工业区二区4号",
-        },
-        {
-          realname: "王小刚",
-          age: "26",
-          sex: "男",
-          phone: "1231231222",
-          type: "村民",
-          address: "陇头工业区二区4号",
-        },
       ],
+
       record: [
         {
           time: "2018-04-12 20:46:12",
@@ -498,6 +410,9 @@ export default {
           type: "edit",
         },
       ],
+      rows: 99,
+      perPage: 10,
+      currentPage: 2,
       search: "",
       dialogAddVisible: false,
       dialogUpsetVisible: false,
@@ -566,6 +481,103 @@ export default {
     },
     handleDownload(file) {
       console.log(file);
+    },
+    upShowInf() {
+      this.showInf = [];
+      if (this.tableInf == []) return;
+      for (var i = 0; i < this.perPage; i++) {
+        var j = (this.currentPage - 1) * this.perPage + i;
+        if (j >= this.tableInf.length) break;
+        this.showInf.push(this.tableInf[j]);
+      }
+    },
+    calculateAge(birthdate) {
+      if (birthdate) {
+        const birthDateObj = new Date(birthdate);
+        const currentDate = new Date();
+
+        if (isNaN(birthDateObj.getTime())) {
+          alert("请输入有效的日期，格式为yyyy-mm-dd");
+          return;
+        }
+
+        let age = currentDate.getFullYear() - birthDateObj.getFullYear();
+
+        // Check if the birthday has already occurred this year
+        const currentMonth = currentDate.getMonth();
+        const birthMonth = birthDateObj.getMonth();
+        const currentDay = currentDate.getDate();
+        const birthDay = birthDateObj.getDate();
+
+        if (
+          currentMonth < birthMonth ||
+          (currentMonth === birthMonth && currentDay < birthDay)
+        ) {
+          age--;
+        }
+
+        return age;
+      }
+    },
+    getTableInf() {
+      post("/auth/showresident", {}).then(
+        (Response) => {
+          console.log("请求成功", Response);
+          var data = Response.data;
+          console.log(data);
+          if (data == undefined) return;
+          this.tableInf = [];
+          for (var i = 0; i < data.length; i++) {
+            var t = data[i];
+            var inf = {
+              id: t.nativeId,
+              realname: t.nativename,
+              age: this.calculateAge(t.birthday),
+              sex: t.sex,
+              phone: t.phoneNumber,
+              type: "村民",
+              address: t.address,
+            };
+            this.tableInf.push(inf);
+          }
+          this.rows = this.tableInf.length;
+          this.currentPage = 1;
+          this.upShowInf();
+        },
+        (error) => {
+          console.log("请求失败", error.message);
+        }
+      );
+    },
+    addResident() {
+      this.dialogAddVisible = false;
+      this.$cookies.set("IsLogin",null)
+      console.log(this.$cookies.get("IsLogin"))
+      
+      this.$message({
+        message: "添加成功",
+        type: "success",
+      });
+    },
+    upsetResident(){
+      this.dialogUpsetVisible=false
+
+      this.$message({
+        message: "修改成功",
+        type: "success",
+      });
+    }
+  },
+  mounted() {
+    this.getTableInf();
+  },
+  watch: {
+    currentPage: {
+      handler() {
+        console.log("3", this.rows, this.perPage, this.currentPage);
+        this.upShowInf();
+      },
+      immediate: true,
     },
   },
 };

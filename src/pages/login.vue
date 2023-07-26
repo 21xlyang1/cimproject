@@ -2,39 +2,25 @@
   <div style="color: #aaa">
     <div class="" style="margin-top: 120px">
       <!-- 用户名 -->
-      <div class="form-floating">
-        <input
-          type="email"
-          class="form-control rounded-0 input"
-          v-model="username.data"
-          placeholder="name@example.com"
-        />
-        <label>用户名</label>
-        <div
-          class="small"
-          :class="username.state == 1 ? 'text-warning' : 'text-danger'"
-          style="height: 16px"
-        >
-          {{ username.info }}
-        </div>
+
+      <FloatingLabel :label="'用户名'" v-model="username.data"></FloatingLabel>
+      <div
+        class="small"
+        :class="username.state == 1 ? 'text-warning' : 'text-danger'"
+        style="height: 16px"
+      >
+        {{ username.info }}
       </div>
       <!-- 密码 -->
-      <div class="form-floating mt-3" >
-        <input
-          type="password"
-          class="form-control rounded-0 input"
-          v-model="password.data"
-          placeholder="Password"
-        />
-        <label>密码</label>
-        <div
-          class="small"
-          :class="password.state == 1 ? 'text-warning' : 'text-danger'"
-          style="height: 16px"
-        >
-          {{ password.info }}
-        </div>
+      <FloatingLabel :type="'password'" :label="'密码'" v-model="password.data"></FloatingLabel>
+      <div
+        class="small"
+        :class="password.state == 1 ? 'text-warning' : 'text-danger'"
+        style="height: 16px"
+      >
+        {{ password.info }}
       </div>
+
       <!--自动登入 -->
       <el-checkbox
         size="medium"
@@ -67,13 +53,14 @@
       </div>
     </div>
     <div class="row">
-      <div class=" col-3"></div>
+      <div class="col-3"></div>
     </div>
   </div>
-
 </template>
 <script>
-import { get } from "@/utils/http";
+import { get,post } from "@/utils/http";
+import FloatingLabel from "@/components/FloatingLabel.vue";
+import router from '@/router';
 export default {
   name: "login",
   data() {
@@ -83,40 +70,44 @@ export default {
       password: { data: "", state: 0, info: "" },
     };
   },
+  components: { FloatingLabel },
   methods: {
     login() {
-      this.username.info= "";
-      this.password.info= "";
-      var flag=true
+      this.username.info = "";
+      this.password.info = "";
+      var flag = true;
       if (this.username.data == "") {
         this.username.state = 1;
         this.username.info = "请输入用户名";
         flag = false;
-      } 
+      }
       if (this.password.data == "") {
         this.password.state = 1;
         this.password.info = "请输入密码";
         flag = false;
       }
 
-
-
       if (!flag) return;
 
+      // post("/auth/login", {
+      //   username: this.username.data,
+      //   password: this.password.data,
 
-      get("/login", {
-        Username: this.username.data,
-        Password: this.password.data,
-      }).then(
-        (Response) => {
-          console.log("请求成功", Response.data);
-        },
-        (error) => {
-          console.log("请求失败", error.message);
-        }
-      );
+      // }).then(
+      //   (Response) => {
+      //     console.log("请求成功", Response);
+      //   },
+      //   (error) => {
+      //     console.log("请求失败", error.message);
+      //   }
+      // );
+      this.$cookies.set("isLog",true)
+      this.$router.push("/")
+      this.$message({
+        message: "欢迎登入",
+        type: "success",
+      });
     },
-    
   },
 };
 </script>
