@@ -1,7 +1,7 @@
 <template>
-  <div class="w-100 h-100 d-flex">
+  <div class="w-50 h-100 d-flex">
     <div
-      class="h-100 ps-4 pe-4"
+      class="h-80 ps-4 pe-4"
       style="flex-grow: 1; background: rgb(0, 0, 0, 0.85)"
     >
       <!-- <adminArtChe></adminArtChe> -->
@@ -16,16 +16,22 @@
       <div class=" mt-4 w-100 d-flex justify-content-center">
         <dataCard danwei="人" title="当日新增常驻人数" :data="16"></dataCard>
       </div>
+      <div>
+        <CLweek/>
+        <CZrelichart/>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import CLweek from "@/components/ECharts/src/CLweek.vue";
 import dataCard from "@/components/dataCard.vue";
 import adminArtChe from "@/components/adminArtChe.vue";
 import residentTable from "@/components/residentTable.vue";
+import CZrelichart from "@/components/ECharts/src/CZrelichart.vue";
 export default {
   name: "residentManage",
-  components: { dataCard, adminArtChe, residentTable },
+  components: { CZrelichart,dataCard, adminArtChe, residentTable,CLweek },
   data() {
     return {
       outerDivHeight: "",

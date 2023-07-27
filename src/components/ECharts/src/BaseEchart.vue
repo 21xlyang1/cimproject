@@ -7,6 +7,7 @@
 </template>
 
 <script>
+//引入echarts包
 import * as echarts from "echarts";
 import reszie from "../mixins/resize";
 export default {
@@ -57,7 +58,6 @@ export default {
   methods: {
     initChart() {
       this.chart = echarts.init(document.getElementById(this.id));
-
       this.chart.setOption(this.option);
     },
   },
