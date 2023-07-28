@@ -16,23 +16,37 @@
         </div>
       </el-scrollbar>
     </div>
-    <div class="h-100" style="min-width: 200px; background: rgb(0, 0, 0, 0.85)">
-      <div class="w-100 d-flex justify-content-center">
-        <dataCard danwei="人" title="当前移动人员总数" :data="1250"></dataCard>
-      </div>
-      <div class="mt-4 w-100 d-flex justify-content-center">
-        <dataCard danwei="人" title="当日最高人流量" :data="1600"></dataCard>
-      </div>
+    <div class="h-100" style="min-width: 220px; background: rgb(0, 0, 0, 0.85)">
+      <el-scrollbar :style="{ height: outerDivHeight }">
+        <div class="w-100 d-flex justify-content-center">
+          <dataCard
+            danwei="人"
+            title="当前移动人员总数"
+            :data="1250"
+          ></dataCard>
+        </div>
+        <div class="mt-4 w-100 d-flex justify-content-center">
+          <dataCard danwei="人" title="当日最高人流量" :data="1600"></dataCard>
+        </div>
+
+          <CLBarchart />
+          <!-- <CLweek /> -->
+          <CLtoday />
+
+      </el-scrollbar>
     </div>
   </div>
 </template>
 <script>
+import CLBarchart from "@/components/ECharts/src/CLBarchart.vue";
+import CLtoday from "@/components/ECharts/src/CLtoday.vue";
+import CLweek from "@/components/ECharts/src/CLweek.vue";
 import cameraCard from "@/components/cameraCard.vue";
 import dataCard from "@/components/dataCard.vue";
 import { post } from "@/utils/http";
 export default {
   name: "cameraList",
-  components: { cameraCard, dataCard },
+  components: { cameraCard, dataCard, CLBarchart, CLtoday, CLweek },
   data() {
     return {
       outerDivHeight: "",

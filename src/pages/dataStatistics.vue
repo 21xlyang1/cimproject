@@ -1,10 +1,6 @@
 <template>
   <div id ="app">
     统计数据页面
-    <line-echart />
-    <pie-echart />
-    <bar-echart />
-  
   </div>
   <!-- <div class="w-100 h-100 d-flex">
     <div class="h-100 " style="flex-grow: 1; background-color: rgba(250, 250, 250, 0.85);">
@@ -30,16 +26,13 @@
   </div> -->
 </template>
 <script>
-import { LineEchart, PieEchart, BarEchart } from "../components/ECharts";
+import { LineEchart, PieEchart, BarEchart,Circularchart } from "../components/ECharts";
 import cameraCard from "../components/cameraCard.vue";
 import dataCard from "../components/dataCard.vue";
 export default {
   components: {
-    LineEchart,
-    PieEchart,
-    BarEchart,
-    // cameraCard,
-    // dataCard
+
+ 
   },
   name: "cameraList",
   data() {

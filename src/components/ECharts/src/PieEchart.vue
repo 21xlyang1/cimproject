@@ -1,5 +1,5 @@
 <template>
-  <base-echart id="pie-echart" class="pie-echart" width="200px" height="300px" :option="option" />
+  <base-echart id="pie-echart" class="pie-echart" width="200px" height="200px" :option="option" />
 </template>
   
 <script>
@@ -14,142 +14,75 @@ export default {
   data() {
     return {
       option: {
-        // title: {
-        //   text: "流动人员检测",
-        //   textStyle: {
-        //     fontSize32,
-        //     color: "white",
-        //   }
-        // },
-        tooltip: {
-          trigger: "item",
+        backgroundColor: '#000',
+        title: {
+          text: '流动人数占比',
+          left: 'center',
+          top: 20,
+          textStyle: {
+            color: '#ccc'
+          }
         },
-        legend: {
-          top: "5%",
-          left: "center",
+        tooltip: {
+          trigger: 'item'
+        },
+        visualMap: {
+          show: false,
+          min: 80,
+          max: 600,
+          inRange: {
+            colorLightness: [0, 1]
+          }
         },
         series: [
           {
-            name: "Access From",
-            type: "pie",
-            radius: ["40%", "70%"],
-            avoidLabelOverlap: false,
-            itemStyle: {
-              borderRadius: 10,
-              borderColor: "#ffffff",
-              borderWidth: 2,
-            },
+            name: '流动人数',
+            type: 'pie',
+            radius: '70%',
+            center: ['50%', '60%'],
+            data: [
+              { value: 335, name: '公共场所1' },
+              { value: 310, name: '公共场所2' },
+              { value: 274, name: '村出入口1' },
+              { value: 235, name: '村出入口2' },
+              { value: 400, name: '村居民区1' },
+              { value: 450, name: '村居民区2' }
+            ].sort(function (a, b) {
+              return a.value - b.value;
+            }),
+            roseType: 'radius',
+            // label: {
+            //   color: 'rgba(255, 255, 255, 0.3)'
+            // },
+            // labelLine: {
+            //   lineStyle: {
+            //     color: 'rgba(255, 255, 255, 0.3)'
+            //   },
+            //   smooth: 0.2,
+            //   length: 10,
+            //   length2: 20
+            // },
             label: {
               show: false,
-              position: "center",
+              position: 'center'
             },
-            emphasis: {
-              label: {
-                show: true,
-                fontSize: 40,
-                fontWeight: "bold",
-              },
+            itemStyle: {
+              color: '#c23531',
+              shadowBlur: 200,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
             },
-            labelLine: {
-              show: false,
-            },
-            data: [
-              { value: 1048, name: "Search Engine" },
-              { value: 735, name: "Direct" },
-              { value: 580, name: "Email" },
-              { value: 484, name: "Union Ads" },
-              { value: 300, name: "Video Ads" },
-              { value: 350, name: "Test Ads" }
-            ],
-          },
-        ],
-      },
-    };
-  },
-  mounted() {
-
-    this.option = {
-      tooltip: {
-        trigger: "item",
-      },
-      //图例的样式
-      legend: {
-        // orient:'vertical',
-        top: "20%",
-        left: "center",
-        // doesn't perfectly work with our tricks, disable it
-        selectedMode: false,
-        textStyle: {
-              color: "white",
-              fontSize:10
-            }
-      },
-      //组件的样式
-      series: [
-        {
-          name: "Access From",
-          type: "pie",
-          radius: ["40%", "70%"],
-          center: ["50%", "70%"],
-          // adjust the start angle
-          startAngle: 180,
-          label: {
-            show: true,
-            formatter(param) {
-              // correct the percentage
-              // return param.name + " (" + param.percent * 2 + "%)";
-              return param.name;
-
-            },
-            textStyle: {
-              color: "white",
-              fontSize: 5
-            }
-          },
-          data: [
-            { value: 1048, name: "Search Engine" },
-            { value: 735, name: "Direct" },
-            { value: 580, name: "Email" },
-            { value: 484, name: "Union Ads" },
-            { value: 300, name: "Video Ads" },
-            {
-              // make an record to fill the bottom 50%
-              value: 1048 + 735 + 580 + 484 + 300,
-              itemStyle: {
-                // stop the chart from rendering this piece
-                color: "black",
-                decal: {
-                  symbol: "none",
-                },
-              },
-              label: {
-                show: true,
-              },
-            },
-          ],
-        },
-      ],
-      itemStyle: {
-        emphasis: {
-          ShadowBlur: 10,
-          ShadowOffsetX: 0,
-          // ShadowColor:rgba(0,0,0,0.5)
-        },
-        normal: {
-          label: {
-            textStyle: {
-              fontSize: 25
+            animationType: 'scale',
+            animationEasing: 'elasticOut',
+            animationDelay: function (idx) {
+              return Math.random() * 200;
             }
           }
-        }
-
+        ]
       }
     };
-
-  }
+  },
 }
 </script>
-<style scoped>
-</style>
+<style scoped></style>
 
   
