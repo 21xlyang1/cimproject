@@ -50,13 +50,14 @@
             circle
             @click="nativeEdit(scope.row)"
           ></el-button>
-          <el-popconfirm title="确定该常驻人员删除吗？">
+          <el-popconfirm  @confirm="delateResident(scope.row.id)" title="确定删除该常驻人员吗？">
             <el-button
               type="danger"
               size="small"
               icon="el-icon-delete"
               circle
               slot="reference"
+
             ></el-button>
           </el-popconfirm>
         </template>
@@ -530,7 +531,7 @@ export default {
           for (var i = 0; i < data.length; i++) {
             var t = data[i];
             var inf = {
-              id: t.nativeId,
+              id: t.nativeld,
               realname: t.nativename,
               age: this.calculateAge(t.birthday),
               sex: t.sex,
@@ -551,25 +552,83 @@ export default {
     },
     addResident() {
       this.dialogAddVisible = false;
-      this.$cookies.set("IsLogin",null)
-      console.log(this.$cookies.get("IsLogin"))
-      
-      this.$message({
-        message: "添加成功",
-        type: "success",
-      });
+
+      console.log(this.$cookies.get("isLog"));
+      post("/auth/addresident", {
+        userId: this.$cookies.get("userId"),
+        nativename: this.form.realname,
+        phoneNumber: this.form.phone,
+        address: this.form.address,
+        birthday: this.form.birthday,
+        sex: this.form.sex,
+      }).then(
+        (Response) => {
+          console.log("请求成功", Response);
+          this.$message({
+            message: "添加成功",
+            type: "success",
+          });
+        },
+        (error) => {
+          console.log("请求失败", error.message);
+        }
+      );
     },
-    upsetResident(){
-      this.dialogUpsetVisible=false
+    upsetResident() {
+      this.dialogUpsetVisible = false;
 
       this.$message({
         message: "修改成功",
         type: "success",
       });
-    }
+    },
+    getRecord() {
+      get("/auth/showoperationrecord", {}).then(
+        (Response) => {
+          console.log("请求成功", Response);
+          var data = Response.data;
+          console.log(data);
+          if (data == undefined) return;
+          this.record = [];
+          for (var i = 0; i < data.length; i++) {
+            var t = data[i];
+            var inf = {
+              time: t.time,
+              user: t.userId,
+              content: t.recordType,
+            };
+            if (t.recordType == "添加常住人口") inf.type = "add";
+            else if (t.recordType == "删除常住人口") inf.type = "delate";
+            this.record.push(inf);
+          }
+        },
+        (error) => {
+          console.log("请求失败", error.message);
+        }
+      );
+    },
+    delateResident(id) {
+      // console.log(id)
+      post("/auth/deleteresident", {
+        userId: this.$cookies.get("userId"),
+        nativeld: id,
+      }).then(
+        (Response) => {
+          console.log("请求成功", Response);
+          this.$message({
+            message: "删除成功",
+            type: "warning",
+          });
+        },
+        (error) => {
+          console.log("请求失败", error.message);
+        }
+      );
+    },
   },
   mounted() {
     this.getTableInf();
+    this.getRecord();
   },
   watch: {
     currentPage: {

@@ -45,7 +45,7 @@
       <div class="m-2">|</div>
       <div>您好，系统管理员</div>
       <div class="m-2">|</div>
-      <div style="color: rgba(219, 101, 116);">个人</div>
+      <a @click="logout" style="color: rgba(219, 101, 116);text-decoration: none;cursor: pointer;" >退出登入</a>
     </div>
   </div>
 </template>
@@ -59,6 +59,13 @@ export default {
       currentDay: "",
       currentDate: "",
     };
+  },
+  methods:{
+    logout(){
+      console.log("fasdf")
+      this.$cookies.set("isLog",false)
+      this.$router.push("/ls/login")
+    }
   },
   created() {
     setInterval(() => {

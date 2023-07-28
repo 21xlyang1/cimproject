@@ -102,6 +102,7 @@ export default {
       //   }
       // );
       this.$cookies.set("isLog",true)
+      this.$cookies.set("userId",1)
       this.$router.push("/")
       this.$message({
         message: "欢迎登入",

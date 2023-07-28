@@ -1,5 +1,5 @@
 import VueRouter from "vue-router"
-const router= new VueRouter({
+const router = new VueRouter({
 	mode: 'hash',
 	base: process.env.BASE_URL,
 	routes: [
@@ -28,9 +28,9 @@ const router= new VueRouter({
 				one: () => import('@/pages/appSystem.vue'),
 				tow: () => import('@/pages/mapCamera.vue')
 			},
-			children:[{
-				path:'',
-				components:{
+			children: [{
+				path: '',
+				components: {
 					tow: () => import('@/pages/mapCamera.vue')
 				}
 			}]
@@ -94,27 +94,28 @@ const router= new VueRouter({
 	]
 })
 
-router.beforeEach((to,from,next)=>{
-  console.log(to, from);
-  if (to.fullPath === '/ls/login' || to.fullPath === '/ls/register') {
-    next();
-  } else {
+router.beforeEach((to, from, next) => {
+	console.log(to, from);
+	if (to.fullPath === '/ls/login' || to.fullPath === '/ls/register') {
+		next();
+	} else {
 
 
-    // 使用 $cookies
-    const isLoggedIn = router.app.$cookies.get('isLog');
-    if (!isLoggedIn) {
-			    // 使用 $message
-    router.app.$message({
-      message: '请先登录或注册',
-      type: 'warning',
-    });
-      router.push('/ls/login');
-    } else {
-      next();
-    }
-  }
-	
+		// 使用 $cookies
+		const isLoggedIn = router.app.$cookies.get('isLog')=='true';
+		console.log(isLoggedIn)
+		if (!isLoggedIn) {
+			// 使用 $message
+			router.app.$message({
+				message: '请先登录或注册',
+				type: 'warning',
+			});
+			router.push('/ls/login');
+		} else {
+			next();
+		}
+	}
+
 })
 
 export default router
